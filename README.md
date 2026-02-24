@@ -29,6 +29,7 @@ The setup script will:
 - **autotask**: AutoTask MCP bridge integration for task management
 - **git**: Git MCP server for automated version control operations
 - **autotask-plugin**: AutoTask plugin with connectivity checking and "start building features" workflow
+- **godot**: Godot MCP server (Rust) + Godot plugin for Cursor integration—see `godot-mcp-server/` and `godot-plugin/`
 
 ### 📦 Adding New Modules
 
@@ -122,6 +123,8 @@ cursor_workflow/
 ├── README.md
 ├── setup.sh              # Complete setup script
 ├── install.sh            # Module installation script
+├── godot-mcp-server/     # Rust MCP server for Godot (./install.sh godot)
+├── godot-plugin/         # Godot editor addon (HTTP API)
 ├── modules/
 │   ├── autotask/
 │   │   ├── mcp-config.json

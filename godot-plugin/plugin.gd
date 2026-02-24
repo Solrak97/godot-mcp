@@ -10,8 +10,8 @@ var _api_handlers: RefCounted
 
 func _enter_tree() -> void:
 	var port: int = _get_port()
-	var ApiHandlersScript := preload("res://addons/godot_mcp/api_handlers.gd")
-	var HttpServerScript := preload("res://addons/godot_mcp/http_server.gd")
+	var ApiHandlersScript := preload("res://godot-plugin/api_handlers.gd")
+	var HttpServerScript := preload("res://godot-plugin/http_server.gd")
 	_api_handlers = ApiHandlersScript.new(get_editor_interface())
 	_http_server = HttpServerScript.new(port, _api_handlers)
 	if not _http_server.start():

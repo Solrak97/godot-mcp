@@ -1,6 +1,6 @@
 ---
 name: cursor-workflow-tools
-description: Use MCP tools and workflows from the cursor_workflow system for task management, git operations, and automated workflows. Use when working with AutoTask tasks, git operations, or when the user mentions task management, commits, or automated workflows.
+description: Use MCP tools and workflows from the cursor_workflow system for task management, git operations, and automated workflows. Use when working with AutoTask tasks, git operations, Godot projects, or when the user mentions task management, commits, automated workflows, or Godot MCP.
 ---
 
 # Cursor Workflow Tools
@@ -33,6 +33,16 @@ The cursor_workflow system provides modular MCP tools accessible through Cursor.
 - **git_commit**: Create commits (auto-stages by default)
 - **git_log**: View commit history
 - **git_branch**: List branches or get current branch
+
+### Godot MCP Tools (if godot module installed; skill: godot-mcp)
+
+- **run_project**, **stop_project**: Play/stop the game
+- **get_output_log**, **get_last_errors**: Logs and errors
+- **get_scene_tree**, **get_selected_nodes**, **get_node_properties**: Scene inspection
+- **set_node_property**: Edit node properties
+- **get_open_scenes**, **get_current_scene**: Open/current scene
+
+Use the **godot-mcp** skill when working with Godot projects, .gd files, .tscn scenes, or running/inspecting the game.
 
 ### Git Setup (skill: git-setup)
 

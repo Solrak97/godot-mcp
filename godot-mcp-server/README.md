@@ -1,17 +1,17 @@
-# Godot MCP Module
+# Godot MCP Server
 
 MCP server bridge for the Godot editor. Enables Cursor to run the game, inspect scenes, read logs, and edit node properties via the Godot MCP plugin.
 
 ## Architecture
 
-- **Part 1: Godot Plugin** (`addons/godot_mcp/`) - HTTP API running inside the editor
-- **Part 2: MCP Bridge** (this module) - Rust stdio MCP server that forwards tool calls to Godot
+- **Part 1: Godot Plugin** (`godot-plugin/`) - HTTP API running inside the editor
+- **Part 2: MCP Bridge** (this folder) - Rust stdio MCP server that forwards tool calls to Godot
 - **Part 3: Cursor** - MCP client (built-in), configured via `.cursor/mcp.json`
 
 ## Installation
 
-1. Enable the Godot MCP plugin in your Godot project (Project > Project Settings > Plugins)
-2. Install this module: `./install.sh godot` (from the cursor_workflow root)
+1. Enable the Godot MCP plugin in your Godot project (Project > Project Settings > Plugins > Godot MCP)
+2. Install this module: `./install.sh godot` (from the repo root)
 3. Restart Cursor
 
 **Requirements:** Rust toolchain (`cargo`) for building the MCP server binary.
@@ -39,7 +39,7 @@ MCP server bridge for the Godot editor. Enables Cursor to run the game, inspect 
 ## Manual Build
 
 ```bash
-cd modules/godot
+cd godot-mcp-server
 cargo build --release
 # Binary: target/release/godot_mcp (or godot_mcp.exe on Windows)
 ```

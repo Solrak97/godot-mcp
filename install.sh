@@ -42,7 +42,10 @@ fi
 # Install each module
 for MODULE in $MODULES; do
     MODULE_DIR="$MODULES_DIR/$MODULE"
-    
+    # Godot module moved to top-level godot-mcp-server/
+    if [ "$MODULE" = "godot" ] && [ ! -d "$MODULE_DIR" ] && [ -d "$SCRIPT_DIR/godot-mcp-server" ]; then
+        MODULE_DIR="$SCRIPT_DIR/godot-mcp-server"
+    fi
     if [ ! -d "$MODULE_DIR" ]; then
         echo "⚠️  Module '$MODULE' not found, skipping..."
         continue
