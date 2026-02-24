@@ -1,0 +1,29 @@
+# AutoTask Plugin Usage
+
+Guidelines for using the AutoTask plugin in Cursor IDE.
+
+## Connectivity Check
+
+Before using AutoTask features, verify connectivity by:
+1. Attempting to call an AutoTask MCP tool (e.g., `list_tasks`)
+2. If the call succeeds, the server is reachable
+3. If it fails, check that:
+   - AutoTask API is running on `http://localhost:8000` (or configured URL)
+   - MCP bridge is properly configured in `.cursor/mcp.json`
+   - Bridge dependencies are installed (`cd bridge && uv sync`)
+
+## Start Building Features Workflow
+
+When the user requests to "start building features":
+
+1. **Check Connectivity**: Use `list_tasks` with minimal parameters to verify connection
+2. **List Open Tasks**: Get available tasks with `status=open`
+3. **Select Task**: Choose the highest priority unblocked task
+4. **Begin Work**: Update task status to `in_progress` and start implementation
+
+## Best Practices
+
+- Always verify connectivity before attempting operations
+- Handle connection errors gracefully with helpful messages
+- Prioritize unblocked tasks when selecting work
+- Update task status appropriately as work progresses

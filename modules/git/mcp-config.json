@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "git": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        ".cursor/cursor_workflow/modules/git",
+        "python",
+        "-m",
+        "git_mcp"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "git_status",
+        "git_diff",
+        "git_log"
+      ]
+    }
+  }
+}

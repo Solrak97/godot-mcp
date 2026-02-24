@@ -1,0 +1,54 @@
+---
+description: Automatically commit changes when closing AutoTask tasks
+alwaysApply: true
+---
+
+# Auto-Commit on Task Close
+
+When closing an AutoTask task (updating status to `closed`), automatically create a git commit describing the completed work.
+
+## Workflow
+
+When you call `update_task` with `status: "closed"`:
+
+1. **After updating the task**: The task status has been changed to `closed`
+2. **Check for changes**: Use `git_status` to see if there are any uncommitted changes
+3. **If changes exist**:
+   - Use `git_commit` with a descriptive message
+   - Message format: `feat: [Task Title] - [Brief description of what was implemented]`
+   - If the task has a description, use it to inform the commit message
+   - The commit should automatically stage all changes (`stage_all: true`)
+
+## Commit Message Format
+
+```
+feat: [Task Title] - [Brief description]
+```
+
+Examples:
+- `feat: Add user authentication - Implement login and registration endpoints`
+- `fix: Resolve database connection issue - Fix connection pooling configuration`
+- `refactor: Improve API error handling - Add consistent error response format`
+
+## When to Skip
+
+Do NOT create a commit if:
+- There are no changes (`git_status` shows clean working directory)
+- The task was already closed (check task status before updating)
+- Only documentation or non-code changes were made (use judgment)
+
+## Implementation
+
+This rule requires both the `autotask` and `git` modules to be installed. The AI should:
+
+1. Call `update_task` with `status: "closed"`
+2. Immediately after, call `git_status` to check for changes
+3. If changes exist, call `git_commit` with an appropriate message
+4. Verify the commit with `git_log` (optional)
+
+## Best Practices
+
+- Always create meaningful commit messages that describe what was implemented
+- Reference the task title in the commit message
+- Use conventional commit prefixes (feat, fix, refactor, docs, test, etc.)
+- If multiple tasks were completed, create separate commits for each

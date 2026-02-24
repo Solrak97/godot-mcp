@@ -1,0 +1,38 @@
+---
+description: When planning in AutoTask, use specific subtasks and make features depend on them.
+alwaysApply: true
+---
+
+# AutoTask: Specific Tasks and Feature Dependencies
+
+When planning or breaking down work in AutoTask, be specific and use dependencies.
+
+## Be specific
+
+- **One task = one concrete piece of work.** Prefer tasks that can be completed in a single, clear step (e.g. "Add GET /users/me endpoint", "Add Follow model and migration", "Add login form to React").
+- **Avoid vague tasks.** Instead of "Implement auth", create separate tasks such as "User model with email and password_hash", "POST /auth/register", "POST /auth/login", "JWT dependency and get_current_user".
+
+## Features as parents of subtasks
+
+When a **feature** requires multiple pieces of work:
+
+1. **Create the concrete tasks first.** Create one task per piece of work (e.g. "Add Tweet model", "POST /tweets", "GET /tweets with author_id filter", "POST /tweets/:id/like", "DELETE /tweets/:id/like").
+2. **Create a feature task** (or use an existing one) that represents the whole feature (e.g. "Tweets and likes: models, CRUD, timeline API").
+3. **Set the feature to depend on the subtasks.** Use `update_task` with `depends_on` set to the list of subtask IDs, so the feature task is only considered complete when all subtasks are done. If the MCP tool does not support `depends_on` in `create_task`, create the feature task then call `update_task` with the subtask IDs once the API supports it.
+
+## Workflow
+
+1. **Plan:** List the concrete steps for the feature.
+2. **Create subtasks:** One task per step, with clear titles and optional descriptions. Assign the same `project_id` as the feature.
+3. **Create or identify the feature task** (kind: feature).
+4. **Set dependencies:** Ensure the feature task has `depends_on` = [subtask IDs].
+5. **Execute:** Work on subtasks in order; mark each `in_progress` then `closed`. When all subtasks are closed, close the feature task.
+
+## Example
+
+For "Auth: User model, human register/login, agent API key":
+
+- Subtasks: "User model (email, password_hash, type, api_key)", "POST /auth/register", "POST /auth/login (JWT)", "create_agent endpoint and require_human", "GET /users/me (auth)"
+- Feature task: "Auth: User model, human register/login, agent API key" with depends_on = [ids of the five subtasks].
+
+This keeps the backlog clear and makes progress visible at a glance.

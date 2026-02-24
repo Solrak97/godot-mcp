@@ -1,0 +1,41 @@
+---
+description: Guidelines for using AutoTask MCP tools in Cursor
+alwaysApply: true
+---
+
+# AutoTask MCP Usage
+
+When working with tasks in this project, use the AutoTask MCP tools to manage tasks through the AutoTask API.
+
+## Available Tools
+
+- `create_task`: Create new tasks with title, description, kind, status, and points
+- `get_task`: Retrieve task details by ID
+- `list_tasks`: List tasks with optional filters (status, kind, project_id, sprint_id, date ranges)
+- `update_task`: Update task properties (title, description, kind, status, points)
+- `delete_task`: Remove a task
+- `list_task_notes`: View notes/comments for a task
+- `create_task_note`: Add a note or comment to a task
+- `list_sprints`: List sprints (optionally filtered by project_id)
+- `get_sprint`: Get sprint details by ID
+
+## Best Practices
+
+1. **Always check task status** before updating: Use `get_task` to verify current state
+2. **Use filters efficiently**: When listing tasks, use appropriate filters to reduce results
+3. **Update status appropriately**: Follow workflow: `open` → `in_progress` → `closed`
+4. **Add context with notes**: Use `create_task_note` to document progress or decisions
+5. **Respect dependencies**: Check task dependencies before marking as complete
+
+## Task Workflow
+
+1. **Create**: Use `create_task` with appropriate kind (task/feature/epic)
+2. **Start**: Update status to `in_progress` when beginning work
+3. **Update**: Use `update_task` to modify properties as needed
+4. **Document**: Add notes with `create_task_note` for important updates
+5. **Complete**: Update status to `closed` when finished
+6. **Commit**: Every time you finish a task (close it), add a git commit for the work. Use the git skill: call the Git MCP tool `git_commit` with a message like `feat: [Task Title] - [brief description]`, or run the commit script from repo root if MCP isn’t used. Check `git_status` first; only commit if there are changes.
+
+## Integration with Git
+
+When closing a task (status → `closed`), **always** create a git commit for the completed work. Use the **git skill** / Git MCP: after `update_task` with `status: "closed"`, call `git_status` and, if there are changes, call `git_commit` with a descriptive message (e.g. `feat: [Task Title] - [what was done]`). Alternatively use the git-setup skill’s commit script. See the auto-commit-on-task-close rule for full workflow.

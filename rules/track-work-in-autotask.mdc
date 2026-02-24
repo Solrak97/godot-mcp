@@ -1,0 +1,40 @@
+---
+description: Create an AutoTask story when starting work and track progress there
+alwaysApply: true
+---
+
+# Track Work in AutoTask
+
+When AutoTask is available, keep work visible and traceable by creating a story for each thing you work on and updating it as you go.
+
+## When to create a story
+
+Create a task (story) when you **start working on**:
+
+- A new feature or user-facing change
+- A fix or refactor that is a distinct unit of work
+- A chunk of work the user asked for (e.g. "add login", "set up the API")
+
+Use `create_task` with a clear title and, if useful, a short description. Use `kind: "feature"` for features or `kind: "task"` for smaller work. Set `status: "in_progress"` when you begin.
+
+## Linking to the project
+
+If the project has an **AutoTask epic ID** (e.g. in `PROJECT_BRIEF.md` or `docs/kickoff.md`), mention it in the task description (e.g. "Part of project epic: [id]") so work is associated with the project. If the AutoTask API or MCP later supports `project_id` on `create_task`, use that to link the story to the project.
+
+## While working
+
+- **Notes**: Use `create_task_note` to record important decisions, blockers, or progress so work is documented.
+- **Status**: Keep the task `in_progress` until the work is done, then set to `closed`.
+
+## When you finish
+
+- Set the task to `closed` with `update_task`.
+- Then follow the auto-commit rule: run `git_status` and, if there are changes, create a git commit (e.g. via `git_commit` or the commit script) with a message that reflects the completed work.
+
+## Summary
+
+1. **Start work** → create a story (`create_task`), set `in_progress`.
+2. **During work** → add notes with `create_task_note` as needed.
+3. **Finish** → `update_task` to `closed`, then commit changes (auto-commit rule).
+
+This keeps all work in AutoTask and ties commits to closed tasks.

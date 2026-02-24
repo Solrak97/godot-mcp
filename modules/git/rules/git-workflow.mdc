@@ -1,0 +1,52 @@
+---
+description: Guidelines for using Git MCP tools in Cursor
+alwaysApply: true
+---
+
+# Git Workflow
+
+When making changes to the codebase, use the Git MCP tools to manage version control.
+
+## Available Tools
+
+- `git_status`: Check current repository status
+- `git_diff`: View changes (use `staged: true` for staged changes)
+- `git_commit`: Create commits with descriptive messages
+- `git_log`: View commit history
+- `git_branch`: List branches or get current branch
+
+## Commit Message Guidelines
+
+When creating commits:
+
+1. **Use conventional commit format** when possible:
+   - `feat: Add new feature`
+   - `fix: Fix bug in X`
+   - `refactor: Refactor Y`
+   - `docs: Update documentation`
+   - `test: Add tests for Z`
+
+2. **Be descriptive but concise**: Explain what changed and why
+
+3. **Reference tasks**: If working with AutoTask, mention task title or ID in commit message
+
+## Workflow
+
+1. **Before committing**: Use `git_status` to see what will be committed
+2. **Review changes**: Use `git_diff` to review modifications
+3. **Create commit**: Use `git_commit` with a clear message
+4. **Verify**: Use `git_log` to confirm the commit was created
+
+## Best Practices
+
+- Commit frequently with logical, atomic changes
+- Write clear commit messages that explain the "what" and "why"
+- Review diffs before committing
+- Use `git_status` to check state before operations
+
+## Integration with AutoTask
+
+When closing an AutoTask task, the auto-commit workflow will automatically:
+1. Check git status
+2. Stage all changes
+3. Create a commit with a message describing the completed work

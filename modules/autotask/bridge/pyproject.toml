@@ -1,0 +1,15 @@
+[project]
+name = "autotask-bridge"
+version = "0.1.0"
+description = "MCP Bridge for AutoTask - Connects Cursor to FastAPI via MCP protocol"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.0.0",
+    "httpx>=0.25.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+autotask-bridge = "bridge.__main__:main"

@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "autotask": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        ".cursor/bridges/autotask",
+        "python",
+        "-m",
+        "bridge"
+      ],
+      "env": {
+        "FASTAPI_URL": "http://localhost:8000"
+      },
+      "disabled": false,
+      "autoApprove": "*"
+    }
+  }
+}
