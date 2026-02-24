@@ -1,0 +1,52 @@
+---
+description: Guidelines for using Godot MCP tools when developing Godot projects
+alwaysApply: false
+globs: ["**/*.gd", "**/*.gdscript", "**/*.tscn", "**/*.tres", "project.godot"]
+---
+
+# Godot MCP Usage
+
+When working with Godot projects, use the Godot MCP tools to inspect, run, and edit the game from Cursor. Requires the Godot MCP plugin to be enabled in the Godot editor and the editor to be running.
+
+## Prerequisites
+
+1. **Godot Editor** must be open with your project
+2. **Godot MCP plugin** must be enabled (Project > Project Settings > Plugins > Godot MCP)
+3. The plugin starts an HTTP server on `http://localhost:4242`
+
+## Available Tools
+
+### Run & Logs
+
+- **run_project** - Start the game (play main scene)
+- **stop_project** - Stop the running game
+- **get_output_log** - Get last N log lines (default 200)
+- **get_last_errors** - Get parsed errors with file, line, message
+
+### Scene Inspection (Read-only)
+
+- **get_open_scenes** - List open scene file paths
+- **get_current_scene** - Get current edited scene path
+- **get_scene_tree** - Get node paths and types in the scene
+- **get_selected_nodes** - Get currently selected node paths
+- **get_node_properties** - Get properties and script for a node (requires node_path)
+
+### Editing
+
+- **set_node_property** - Set a node property (path, property, value as JSON)
+
+## Workflow: Inspect, Change, Run, Diagnose
+
+1. Use **get_scene_tree** or **get_selected_nodes** to understand the scene structure
+2. Use **get_node_properties** to inspect a specific node
+3. Edit GDScript or scene files in Cursor
+4. Use **run_project** to test
+5. Use **get_output_log** or **get_last_errors** to diagnose issues
+6. Use **set_node_property** for quick property tweaks without opening the editor
+
+## Best Practices
+
+- Keep the Godot editor open when using MCP tools
+- Use **get_last_errors** after running to catch script errors
+- Node paths in the scene tree are relative to the root (e.g. `/Root/Player/Sprite`)
+- For **set_node_property**, value must be valid JSON matching the property type
